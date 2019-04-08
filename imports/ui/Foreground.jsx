@@ -2,8 +2,12 @@ import React, { Component } from 'react'
 
 export class Foreground extends Component {
     render() {
+        const style = {position: 'static'};
+
         return (
-            <div>Foreground</div>
+            <div style={style}>
+                <img src={'/mock/losi.png'}/>
+            </div>
         );
     }
 }
