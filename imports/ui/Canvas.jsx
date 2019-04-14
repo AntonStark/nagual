@@ -6,10 +6,9 @@ import { Layer } from '/imports/ui/Layer'
 export class Canvas extends Component {
 
     render() {
-        const style = {position: 'absolute', left: '130px'};
 
         return (
-            <div style={style}>
+            <div>
                 <Layer/>
                 <Foreground/>
             </div>

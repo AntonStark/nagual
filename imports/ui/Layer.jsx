@@ -6,7 +6,7 @@ export class Layer extends Component {
 
         return (
             <div style={style}>
-                <h2>Layer information</h2>
+                <h2 style={{position: 'absolute', left: '120px', top: '50px'}}>Layer information</h2>
             </div>
         )
     }
