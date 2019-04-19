@@ -7,7 +7,7 @@ import { Table } from "/imports/ui/Table";
 class App extends Component {
     render() {
         const styleCanvas = {position: 'absolute', left: '100px'};
-        const styleTable = {position: 'absolute', right: '100px'};
+        const styleTable = {position: 'absolute', right: '100px', top: '200px'};
 
         return (
             <div>
