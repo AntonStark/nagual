@@ -2,3 +2,9 @@ body {
   padding: 10px;
   font-family: sans-serif;
 }
+
+.marker {
+  width: 8px;
+  height: 8px;
+  background: blue;
+}
