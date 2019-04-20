@@ -11,7 +11,7 @@ class App extends Component {
 
         return (
             <div>
-                <h1>Nagual Project</h1>
+                <h1 style={{margin: '5px'}}>Nagual Project</h1>
                 <div style={styleCanvas}>
                     <Canvas/>
                 </div>
