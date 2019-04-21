@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
+import { withTracker } from 'meteor/react-meteor-data'
 
 import { Background } from '/imports/ui/Background'
 import { Layer } from '/imports/ui/Layer'
 import { LockComponent } from "/imports/ui/LockComponent";
 
-import {Marker} from "../api/marker";
+import { Markers } from "../api/markers";
 
 export class Canvas extends Component {
     constructor(props) {
         super(props);
-        this.state = {lock: true, markers: []};
-        this.state.markers = [];
+        this.state = {lock: true};
         this.handleLockToggle = this.handleLockToggle.bind(this);
         this.handleAddMarker = this.handleAddMarker.bind(this);
     }
@@ -18,7 +18,10 @@ export class Canvas extends Component {
         this.setState({lock: checked});
     }
     handleAddMarker(x, y) {
-        this.setState(state => ({markers: state.markers.concat(new Marker(x, y))}));
+        if (!this.state.lock)
+            Markers.insert({geometry: {pos_x: x, pos_y: y}});
+        else
+            console.log('canvas locked')
     }
     render() {
         const styleBackground = {display: 'inline-block'};
@@ -26,7 +29,7 @@ export class Canvas extends Component {
 
         return (
             <div>
-                <Layer markers={this.state.markers}/>
+                <Layer markers={this.props.markers}/>
                 <div style={styleBackground}>
                     <Background add={this.handleAddMarker}/>
                 </div>
@@ -37,3 +40,7 @@ export class Canvas extends Component {
         );
     }
 }
+
+export const CanvasMarkers = withTracker(() => ({
+    markers: Markers.find({}).fetch()
+}))(Canvas);

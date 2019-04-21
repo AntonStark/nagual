@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withTracker } from 'meteor/react-meteor-data'
 
-import { Canvas } from '/imports/ui/Canvas';
+import { Canvas, CanvasMarkers } from '/imports/ui/Canvas';
 import { Table } from "/imports/ui/Table";
 
 class App extends Component {
@@ -13,7 +13,7 @@ class App extends Component {
             <div>
                 <h1 style={{margin: '5px'}}>Nagual Project</h1>
                 <div style={styleCanvas}>
-                    <Canvas/>
+                    <CanvasMarkers/>
                 </div>
                 <div style={styleTable}>
                     <Table/>
