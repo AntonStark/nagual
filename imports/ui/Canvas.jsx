@@ -10,9 +10,10 @@ import { Markers } from "../api/markers";
 export class Canvas extends Component {
     constructor(props) {
         super(props);
-        this.state = {lock: true};
+        this.state = {lock: true, selectedMarker: undefined};
         this.handleLockToggle = this.handleLockToggle.bind(this);
         this.handleAddMarker = this.handleAddMarker.bind(this);
+        this.setSelectedMarkerId = this.setSelectedMarkerId.bind(this);
     }
     handleLockToggle(checked) {
         this.setState({lock: checked});
@@ -23,19 +24,23 @@ export class Canvas extends Component {
         else
             console.log('canvas locked')
     }
+    setSelectedMarkerId(marker) {
+        this.setState({selectedMarker: marker});
+    }
     render() {
         const styleBackground = {display: 'inline-block'};
         const styleLock = {display: 'inline-block', position: 'absolute', margin: '10px'};
 
         return (
             <div>
-                <Layer markers={this.props.markers}/>
+                <Layer markers={this.props.markers} onMarkerSelection={this.setSelectedMarkerId}/>
                 <div style={styleBackground}>
                     <Background add={this.handleAddMarker}/>
                 </div>
                 <div style={styleLock}>
                     <LockComponent lock={this.state.lock} onLockToggle={this.handleLockToggle}/>
                 </div>
+                <button>{this.state.selectedMarker ? this.state.selectedMarker._id : 'no'}</button>
             </div>
         );
     }
