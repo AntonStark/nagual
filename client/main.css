@@ -1,5 +1,10 @@
 .marker {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
+  border: 2px solid blue;
   background: blue;
+}
+
+.selected {
+  border: 2px solid orangered;
 }

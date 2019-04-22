@@ -19,8 +19,10 @@ export class Canvas extends Component {
         this.setState({lock: checked});
     }
     handleAddMarker(x, y) {
-        if (!this.state.lock)
-            Markers.insert({geometry: {pos_x: x, pos_y: y}});
+        if (!this.state.lock) {
+            const addedId = Markers.insert({geometry: {pos_x: x, pos_y: y}});
+            this.setSelectedMarkerId(Markers.findOne({_id: addedId}));
+        }
         else
             console.log('canvas locked')
     }
@@ -33,14 +35,14 @@ export class Canvas extends Component {
 
         return (
             <div>
-                <Layer markers={this.props.markers} onMarkerSelection={this.setSelectedMarkerId}/>
+                <Layer markers={this.props.markers} selectedMarker={this.state.selectedMarker}
+                       onMarkerSelection={this.setSelectedMarkerId}/>
                 <div style={styleBackground}>
                     <Background add={this.handleAddMarker}/>
                 </div>
                 <div style={styleLock}>
                     <LockComponent lock={this.state.lock} onLockToggle={this.handleLockToggle}/>
                 </div>
-                <button>{this.state.selectedMarker ? this.state.selectedMarker._id : 'no'}</button>
             </div>
         );
     }

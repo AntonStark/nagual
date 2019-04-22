@@ -9,7 +9,9 @@ export class Layer extends Component {
             <div key={marker._id}
                  style={{position: 'absolute',
                      left: marker.geometry.pos_x + 'px',
-                     top: marker.geometry.pos_y + 'px'}} className='marker'
+                     top: marker.geometry.pos_y + 'px'}}
+                 className={this.props.selectedMarker
+                      && marker._id === this.props.selectedMarker._id ? 'marker selected' : 'marker'}
                  onClick={() => this.props.onMarkerSelection(marker)}/>
         );
         return (
