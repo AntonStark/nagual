@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from "prop-types";
+
 import {Marker} from "../api/marker";
 
 export class Layer extends Component {
@@ -24,7 +25,7 @@ export class Layer extends Component {
                      left: marker.geometry.pos_x + 'px',
                      top: marker.geometry.pos_y + 'px'}} tabIndex='0'
                  className={this.props.selectedMarker
-                      && marker._id === this.props.selectedMarker._id ? 'marker selected' : 'marker'}
+                      && this.props.selectedMarker._id === marker._id ? 'marker selected' : 'marker'}
                  onFocus={() => this.props.onMarkerSelection(marker)}
                  onBlur={() => this.props.onMarkerSelection(undefined)}
                  onKeyDown={this.generateKeyDownHandler(marker)}/>

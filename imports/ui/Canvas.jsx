@@ -14,10 +14,13 @@ export class Canvas extends Component {
         this.handleLockToggle = this.handleLockToggle.bind(this);
         this.handleAddMarker = this.handleAddMarker.bind(this);
         this.setSelectedMarker = this.setSelectedMarker.bind(this);
-        Canvas.handlerDeleteMarker = Canvas.handlerDeleteMarker.bind(this);
+        this.handlerDeleteMarker = this.handlerDeleteMarker.bind(this);
     }
     handleLockToggle(checked) {
         this.setState({lock: checked});
+    }
+    setSelectedMarker(marker) {
+        this.setState({selectedMarker: marker});
     }
     handleAddMarker(x, y) {
         if (!this.state.lock) {
@@ -28,11 +31,11 @@ export class Canvas extends Component {
         else
             console.log('canvas locked')
     }
-    setSelectedMarker(marker) {
-        this.setState({selectedMarker: marker});
-    }
-    static handlerDeleteMarker(marker) {
-        Markers.remove({_id: marker._id})
+    handlerDeleteMarker(marker) {
+        if (!this.state.lock)
+            Markers.remove({_id: marker._id});
+        else
+            console.log('canvas locked')
     }
     render() {
         const styleBackground = {display: 'inline-block'};
@@ -41,7 +44,7 @@ export class Canvas extends Component {
         return (
             <div>
                 <Layer markers={this.props.markers} selectedMarker={this.state.selectedMarker}
-                       onMarkerSelection={this.setSelectedMarker} onDeleteMarker={Canvas.handlerDeleteMarker}/>
+                       onMarkerSelection={this.setSelectedMarker} onDeleteMarker={this.handlerDeleteMarker}/>
                 <div style={styleBackground}>
                     <Background add={this.handleAddMarker}/>
                 </div>
