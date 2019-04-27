@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+import { withTracker } from 'meteor/react-meteor-data'
+
+import { Variables } from '/imports/api/variables'
 
 export class Table extends Component {
     render() {
@@ -27,3 +30,7 @@ export class Table extends Component {
         )
     }
 }
+
+export const TableVariables = withTracker(() => ({
+    variables: Variables.find({}).fetch()
+}))(Table);
