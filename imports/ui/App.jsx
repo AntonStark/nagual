@@ -15,7 +15,7 @@ class App extends Component {
     }
     render() {
         const styleCanvas = {position: 'absolute', left: '100px'};
-        const styleTable = {position: 'absolute', right: '100px', top: '200px'};
+        const styleTable = {position: 'absolute', left: '1500px', top: '150px'};
 
         return (
             <div>

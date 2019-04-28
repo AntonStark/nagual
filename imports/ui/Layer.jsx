@@ -27,7 +27,7 @@ export class Layer extends Component {
                  className={this.props.selectedMarker
                       && this.props.selectedMarker._id === marker._id ? 'marker selected' : 'marker'}
                  onFocus={() => this.props.onMarkerSelection(marker)}
-                 onBlur={() => this.props.onMarkerSelection(undefined)}
+                 // onBlur={() => this.props.onMarkerSelection(undefined)}
                  onKeyDown={this.generateKeyDownHandler(marker)}/>
         );
         return (
