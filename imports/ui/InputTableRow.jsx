@@ -1,0 +1,41 @@
+import React, { Component } from 'react'
+
+export class InputTableRow extends Component {
+    constructor(props) {
+        super(props);
+        this.refNameField = React.createRef();
+        this.refValueField = React.createRef();
+        this.handlerNameField = this.handlerNameField.bind(this);
+        this.handlerValueField = this.handlerValueField.bind(this);
+    }
+    handlerNameField(e) {
+        console.log(e.type);
+        if (e.key === 'Enter' || e.key === 'Tab') {
+            this.refValueField.current.style.visibility = 'visible';
+            this.refValueField.current.focus();
+            e.preventDefault();
+        }
+    }
+    handlerValueField(e) {
+        if (e.key === 'Enter') {
+            this.props.onAddVariable(this.props.selectedMarker,
+                this.refNameField.current.value, this.refValueField.current.value);
+            console.log('add');
+        }
+        else if (e.key === 'Escape') {
+            this.refValueField.current.value = '';
+            this.refNameField.current.focus();
+            this.refNameField.current.select();
+        }
+    }
+    render() {
+        return (
+            <tr>
+                <td><input type={'input'} placeholder={'добавить'} style={{width: '120px'}}
+                           ref={this.refNameField} onKeyDown={this.handlerNameField}/></td>
+                <td><input type={'input'} placeholder={'значение'} style={{width: '120px', visibility: 'hidden'}}
+                           ref={this.refValueField} onKeyDown={this.handlerValueField}/></td>
+            </tr>
+        )
+    }
+}
