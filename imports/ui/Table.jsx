@@ -33,6 +33,8 @@ export class Table extends Component {
         var _marker = this.props.selectedMarker;
         if (!_marker)
             return null;
+        if (!_marker.data)
+            _marker.data = {vars: []};
         return (
             <div style={style}>
                 <table>
