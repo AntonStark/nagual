@@ -21,12 +21,16 @@ export class Table extends Component {
         const varId = (curVariable.count() === 0
             ? Variables.insert({name: name, uses: []})
             : curVariable.fetch()[0]._id);
-        Variables.update(varId, {$addToSet: {uses: marker._id}});
 
         if (!marker.data)
             marker.data = {vars: []};
-        if (!isMarkerHasThatVar(marker, varId))
+        if (!isMarkerHasThatVar(marker, varId)) {
             Markers.update(marker._id, {$push: {'data.vars': {var_id: varId, value: value}}});
+            Variables.update(varId, {$addToSet: {uses: marker._id}});
+            console.log('variable added')
+        }
+        else
+            console.error('that var already in use on marker');
     }
     render() {
         const style = {textAlign: 'left'};

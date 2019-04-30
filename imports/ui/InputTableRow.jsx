@@ -9,7 +9,6 @@ export class InputTableRow extends Component {
         this.handlerValueField = this.handlerValueField.bind(this);
     }
     handlerNameField(e) {
-        console.log(e.type);
         if (e.key === 'Enter' || e.key === 'Tab') {
             this.refValueField.current.style.visibility = 'visible';
             this.refValueField.current.focus();
@@ -20,7 +19,6 @@ export class InputTableRow extends Component {
         if (e.key === 'Enter') {
             this.props.onAddVariable(this.props.selectedMarker,
                 this.refNameField.current.value, this.refValueField.current.value);
-            console.log('add');
             this.refNameField.current.value = '';
             this.refValueField.current.value = '';
             this.refNameField.current.focus();
