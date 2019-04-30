@@ -9,3 +9,21 @@
 .selected {
   border: 2px solid orangered;
 }
+
+.mapBackground {
+  border-radius: 8px;
+}
+
+.markerTable input {
+  width: 120px;
+  font: inherit;
+  border: none;
+  outline: none;
+}
+
+.markerTable input[disabled] {
+  padding: 0;
+  vertical-align: inherit;
+  color: inherit;
+  background: none;
+}

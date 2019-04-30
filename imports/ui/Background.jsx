@@ -18,7 +18,8 @@ export class Background extends Component {
 
         return (
             <div style={style}>
-                <img ref={this.backgroundRef} src={'/mock/losi.png'} alt='background' onClick={this.handleAddMarker}/>
+                <img src={'/mock/losi.png'} alt='background' className={'mapBackground'}
+                     ref={this.backgroundRef} onClick={this.handleAddMarker}/>
             </div>
         );
     }

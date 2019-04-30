@@ -41,7 +41,7 @@ export class Table extends Component {
             _marker.data = {vars: []};
         return (
             <div style={style}>
-                <table>
+                <table className={'markerTable'}>
                     <thead>
                     <tr><th>Variable</th><th>Value</th></tr>
                     </thead>

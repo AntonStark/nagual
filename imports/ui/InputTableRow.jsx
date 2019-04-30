@@ -31,9 +31,9 @@ export class InputTableRow extends Component {
     render() {
         return (
             <tr>
-                <td><input type={'input'} placeholder={'добавить'} style={{width: '120px'}}
+                <td><input type={'input'} placeholder={'добавить'}
                            ref={this.refNameField} onKeyDown={this.handlerNameField}/></td>
-                <td><input type={'input'} placeholder={'значение'} style={{width: '120px', visibility: 'hidden'}}
+                <td><input type={'input'} placeholder={'значение'} style={{visibility: 'hidden'}}
                            ref={this.refValueField} onKeyDown={this.handlerValueField}/></td>
             </tr>
         )
