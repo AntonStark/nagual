@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export class InputTableRow extends Component {
+export class TableRowAdding extends Component {
     constructor(props) {
         super(props);
         this.refNameField = React.createRef();

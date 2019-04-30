@@ -26,8 +26,7 @@ export class TableRow extends Component {
                 ...prevState.valueField,
                 disabled: true
             }
-        }));
-        // todo update var value
+        }), () => this.props.onVariableUpdate(this.state.valueField.value));
         document.getSelection().empty();
     }
     keyDownHandler(e) {
