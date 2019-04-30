@@ -21,9 +21,11 @@ export class InputTableRow extends Component {
             this.props.onAddVariable(this.props.selectedMarker,
                 this.refNameField.current.value, this.refValueField.current.value);
             console.log('add');
+            this.refNameField.current.value = '';
+            this.refValueField.current.value = '';
+            this.refNameField.current.focus();
         }
         else if (e.key === 'Escape') {
-            this.refValueField.current.value = '';
             this.refNameField.current.focus();
             this.refNameField.current.select();
         }
