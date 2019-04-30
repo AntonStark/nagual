@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { withTracker } from 'meteor/react-meteor-data'
 
 import { Background } from '/imports/ui/Background'
 import { Layer } from '/imports/ui/Layer'
@@ -24,8 +23,7 @@ export class Canvas extends Component {
                 geometry: {pos_x: x, pos_y: y},
                 data: {vars: []}
             });
-            const created = Markers.findOne({_id: addedId});
-            this.props.handleSelectMarker(created);
+            this.props.handleSelectMarker(addedId);
         }
         else
             console.log('canvas locked')
@@ -42,7 +40,7 @@ export class Canvas extends Component {
 
         return (
             <div>
-                <Layer markers={this.props.markers} selectedMarker={this.props.selectedMarker}
+                <Layer markers={this.props.markers} selectedMarkerId={this.props.selectedMarkerId}
                        onMarkerSelection={this.props.handleSelectMarker} onDeleteMarker={this.handlerDeleteMarker}/>
                 <div style={styleBackground}>
                     <Background add={this.handleAddMarker}/>
@@ -54,7 +52,3 @@ export class Canvas extends Component {
         );
     }
 }
-
-export const CanvasMarkers = withTracker(() => ({
-    markers: Markers.find({}).fetch()
-}))(Canvas);

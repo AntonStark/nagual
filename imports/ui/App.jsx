@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import { withTracker } from 'meteor/react-meteor-data'
 
-import { CanvasMarkers } from '/imports/ui/Canvas';
+import { Canvas } from '/imports/ui/Canvas';
 import { TableVariables } from "/imports/ui/Table";
+import { Markers } from '../api/markers';
 
 class App extends Component {
     constructor(props) {
         super(props);
-        this.state = {selectedMarker: undefined};
-        this.setSelectedMarker = this.setSelectedMarker.bind(this);
+        this.state = {selectedId: undefined};
+        this.setSelectedId = this.setSelectedId.bind(this);
     }
-    setSelectedMarker(marker) {
-        this.setState({selectedMarker: marker});
+    setSelectedId(marker_id) {
+        this.setState({selectedId: marker_id});
     }
     render() {
         const styleCanvas = {position: 'absolute', left: '100px'};
@@ -21,19 +22,19 @@ class App extends Component {
             <div>
                 <h1 style={{margin: '5px'}}>Nagual Project</h1>
                 <div style={styleCanvas}>
-                    <CanvasMarkers
-                        handleSelectMarker={this.setSelectedMarker}
-                        selectedMarker={this.state.selectedMarker}/>
+                    <Canvas markers={this.props.markers}
+                        handleSelectMarker={this.setSelectedId}
+                        selectedMarkerId={this.state.selectedId}/>
                 </div>
                 <div style={styleTable}>
                     <TableVariables
-                        selectedMarker={this.state.selectedMarker}/>
+                        selectedMarker={Markers.findOne({_id: this.state.selectedId})}/>
                 </div>
             </div>
         );
     }
 }
 
-export default withTracker(() => {
-    return {};
-})(App);
+export default withTracker(() => ({
+    markers: Markers.find({}).fetch()
+}))(App);

@@ -30,7 +30,7 @@ export class Table extends Component {
     }
     render() {
         const style = {textAlign: 'left'};
-        var _marker = this.props.selectedMarker;
+        const _marker = this.props.selectedMarker;
         if (!_marker)
             return null;
         if (!_marker.data)
