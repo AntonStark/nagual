@@ -52,7 +52,6 @@ export class Table extends Component {
         Variables.update(varId, {$pull: {uses: markerId}});
     }
     render() {
-        const style = {textAlign: 'left'};
         const _marker = this.props.selectedMarker;
         if (!_marker)
             return null;
@@ -63,18 +62,16 @@ export class Table extends Component {
                       onVariableUpdate={Table.updateVariable.bind(null, _marker._id, entry.var_id)}/>)
         );
         return (
-            <div style={style}>
-                <table key={_marker._id} className={'markerTable'}>
-                    {/*table.key with TableRow.key express (marker._id, var._id) unique constraint*/}
-                    <thead>
-                    <tr><th>Variable</th><th>Value</th></tr>
-                    </thead>
-                    <tbody>
-                    {tableOrdinaryRows}
-                    <TableRowAdding selectedMarker={_marker} onAddVariable={Table.addVariable}/>
-                    </tbody>
-                </table>
-            </div>
+            <table key={_marker._id} className={'markerTable'}>
+                {/*table.key with TableRow.key express (marker._id, var._id) unique constraint*/}
+                <thead>
+                <tr><th>Variable</th><th>Value</th></tr>
+                </thead>
+                <tbody>
+                {tableOrdinaryRows}
+                <TableRowAdding selectedMarker={_marker} onAddVariable={Table.addVariable}/>
+                </tbody>
+            </table>
         )
     }
 }

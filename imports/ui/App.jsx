@@ -25,8 +25,8 @@ class App extends Component {
     }
     render() {
         const styleCanvas = {position: 'absolute', left: '100px'};
-        const styleMarkerTable = {position: 'absolute', left: '1500px', top: '150px'};
-        const styleVariableTable = {position: 'absolute', left: '1500px', top: '500px'};
+        const styleMarkerTable = {position: 'absolute', left: '1500px', top: '150px', textAlign: 'left'};
+        const styleVariableTable = {position: 'absolute', left: '1500px', top: '500px', textAlign: 'left'};
 
         return (
             <div>

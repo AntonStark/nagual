@@ -22,7 +22,9 @@ export class VariableTable extends Component {
 
         const usesInfo = variable.uses.map(marker_id => (
            <tr key={marker_id}>
-               <td onClick={() => this.props.onMarkerSelection(marker_id)}>{marker_id}</td>
+               <td onClick={() => this.props.onMarkerSelection(marker_id)}>
+                   <div className={'tableRowActiveKey'}>{marker_id}</div>
+               </td>
                <td>{getValue(marker_id, _var_id)}</td>
            </tr>
         ));

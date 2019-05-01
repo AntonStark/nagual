@@ -46,7 +46,9 @@ export class TableRow extends Component {
         const _var = this.props.entry;
         return (
             <tr>
-                <td onClick={() => this.props.onVariableSelect(_var.var_id)}>{Variables.findOne(_var.var_id).name}</td>
+                <td onClick={() => this.props.onVariableSelect(_var.var_id)}>
+                    <div className={'tableRowActiveKey'} style={{width: 'min-content'}}>{Variables.findOne(_var.var_id).name}</div>
+                </td>
                 <td onClick={this.clickHandler}>
                     <input disabled={this.state.valueField.disabled} value={this.state.valueField.value}
                            type={'text'} ref={this.refValueField}
