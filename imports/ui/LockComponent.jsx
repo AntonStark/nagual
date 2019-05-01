@@ -11,7 +11,7 @@ export class LockComponent extends Component {
     render() {
         const lock = this.props.lock;
         return (
-            <form>
+            <form onClick={() => this.props.onLockToggle(!this.props.lock)}>
                 <label>Блокировка<br/>расстановки</label>
                 <input type={'checkbox'} name={'lock-checkbox'} checked={lock} onChange={this.handleChange}/>
             </form>
