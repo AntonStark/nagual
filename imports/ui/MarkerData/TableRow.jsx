@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { Variables } from '../api/variables'
+import { Variables } from '../../api/variables'
 
 export class TableRow extends Component {
     constructor(props) {
@@ -46,7 +46,7 @@ export class TableRow extends Component {
         const _var = this.props.entry;
         return (
             <tr>
-                <td>{Variables.findOne(_var.var_id).name}</td>
+                <td onClick={() => this.props.onVariableSelect(_var.var_id)}>{Variables.findOne(_var.var_id).name}</td>
                 <td onClick={this.clickHandler}>
                     <input disabled={this.state.valueField.disabled} value={this.state.valueField.value}
                            type={'text'} ref={this.refValueField}

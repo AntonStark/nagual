@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { withTracker } from 'meteor/react-meteor-data'
 
-import { TableRow } from '/imports/ui/TableRow';
-import { TableRowAdding } from '/imports/ui/TableRowAdding';
+import { TableRow } from '/imports/ui/MarkerData/TableRow';
+import { TableRowAdding } from '/imports/ui/MarkerData/TableRowAdding';
 
-import { Variables, getVatiableId } from '../api/variables'
-import { Markers, isMarkerHasThatVar } from "../api/markers";
+import { Variables, getVatiableId } from '../../api/variables'
+import { Markers, isMarkerHasThatVar } from "../../api/markers";
 
 export class Table extends Component {
     constructor(props) {
@@ -59,7 +59,7 @@ export class Table extends Component {
         if (!_marker.data)
             _marker.data = {vars: []};
         const tableOrdinaryRows = _marker.data.vars.map(entry => (
-            <TableRow key={entry.var_id} entry={entry}
+            <TableRow key={entry.var_id} entry={entry} onVariableSelect={this.props.onVariableSelect}
                       onVariableUpdate={Table.updateVariable.bind(null, _marker._id, entry.var_id)}/>)
         );
         return (

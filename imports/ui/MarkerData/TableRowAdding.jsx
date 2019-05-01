@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
-import { isMarkerHasThatVar } from "../api/markers";
-import { getVatiableId } from "../api/variables";
+import { isMarkerHasThatVar } from "../../api/markers";
+import { getVatiableId } from "../../api/variables";
 
 export class TableRowAdding extends Component {
     constructor(props) {
