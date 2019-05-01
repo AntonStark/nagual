@@ -4,8 +4,8 @@ import { withTracker } from 'meteor/react-meteor-data'
 import { TableRow } from '/imports/ui/TableRow';
 import { TableRowAdding } from '/imports/ui/TableRowAdding';
 
-import { Variables } from '../api/variables'
-import {Markers, isMarkerHasThatVar} from "../api/markers";
+import { Variables, getVatiableId } from '../api/variables'
+import { Markers, isMarkerHasThatVar } from "../api/markers";
 
 export class Table extends Component {
     constructor(props) {
@@ -14,13 +14,16 @@ export class Table extends Component {
 
     static addVariable(marker, name, value) {
         if (!marker) {
-            console.log('Marker not selected');
+            console.log('marker not selected');
             return;
         }
-        const curVariable = Variables.find({name: name});
-        const varId = (curVariable.count() === 0
-            ? Variables.insert({name: name, uses: []})
-            : curVariable.fetch()[0]._id);
+        if (value === '') {
+            console.error('empty value not allowed');
+            return;
+        }
+        let varId = getVatiableId(name);
+        if (!varId)
+            varId = Variables.insert({name: name, uses: []});
 
         if (!isMarkerHasThatVar(marker, varId)) {
             Markers.update(marker._id, {$push: {'data.vars': {var_id: varId, value: value}}});
@@ -31,6 +34,11 @@ export class Table extends Component {
             console.error('that var already in use on marker');
     }
     static updateVariable(markerId, varId, newValue) {
+        if (newValue === '') {
+            Table.deleteVariableValue(markerId, varId);
+            return;
+        }
+
         const oldVars = Markers.findOne(markerId).data.vars;
         for(let v in oldVars) {
             if (oldVars[v].var_id === varId) {
@@ -38,6 +46,10 @@ export class Table extends Component {
                 Markers.update(markerId, {$set: {[query]: newValue}});
             }
         }
+    }
+    static deleteVariableValue(markerId, varId) {
+        Markers.update(markerId, {$pull: {'data.vars': {var_id: varId}}});
+        Variables.update(varId, {$pull: {uses: markerId}});
     }
     render() {
         const style = {textAlign: 'left'};
@@ -52,7 +64,8 @@ export class Table extends Component {
         );
         return (
             <div style={style}>
-                <table className={'markerTable'}>
+                <table key={_marker._id} className={'markerTable'}>
+                    {/*table.key with TableRow.key express (marker._id, var._id) unique constraint*/}
                     <thead>
                     <tr><th>Variable</th><th>Value</th></tr>
                     </thead>
