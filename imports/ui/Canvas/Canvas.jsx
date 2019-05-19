@@ -5,6 +5,7 @@ import { Layer } from '/imports/ui/Canvas/Layer'
 import { LockComponent } from "/imports/ui/LockComponent";
 
 import { Markers } from "../../api/markers";
+import {BackgroundSVG} from "./BackgroundSVG";
 
 export class Canvas extends Component {
     constructor(props) {
@@ -43,7 +44,8 @@ export class Canvas extends Component {
                 <Layer markers={this.props.markers} selectedMarkerId={this.props.selectedMarkerId}
                        onMarkerSelection={this.props.handleSelectMarker} onDeleteMarker={this.handlerDeleteMarker}/>
                 <div style={styleBackground}>
-                    <Background add={this.handleAddMarker}/>
+                    {/*<Background add={this.handleAddMarker}/>*/}
+                    <BackgroundSVG/>
                 </div>
                 <div style={styleLock}>
                     <LockComponent lock={this.state.lock} onLockToggle={this.handleLockToggle}/>
