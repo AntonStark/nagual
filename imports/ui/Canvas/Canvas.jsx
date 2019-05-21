@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 
-import { Background } from '/imports/ui/Canvas/Background'
+// import { Background } from '/imports/ui/Canvas/Background'
+import {BackgroundSVG} from "./BackgroundSVG";
 import { Layer } from '/imports/ui/Canvas/Layer'
 import { LockComponent } from "/imports/ui/LockComponent";
 
 import { Markers } from "../../api/markers";
-import {BackgroundSVG} from "./BackgroundSVG";
 
 export class Canvas extends Component {
     constructor(props) {
