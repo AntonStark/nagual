@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withTracker } from 'meteor/react-meteor-data'
 
-import { Canvas } from '/imports/ui/Canvas/Canvas';
+import { CanvasContainer } from '/imports/ui/CanvasContainer';
 import { TableVariables } from "/imports/ui/MarkerData/Table";
 import { VariableTable } from '/imports/ui/VariableTable/VariableTable';
 
@@ -32,9 +32,9 @@ class App extends Component {
             <div>
                 <h1 style={{margin: '5px'}}>Nagual Project</h1>
                 <div style={styleCanvas}>
-                    <Canvas markers={this.props.markers}
-                            handleSelectMarker={this.setSelectedMarkerId}
-                            selectedMarkerId={this.state.selectedMarkerId}/>
+                    <CanvasContainer markers={this.props.markers}
+                                     handleSelectMarker={this.setSelectedMarkerId}
+                                     selectedMarkerId={this.state.selectedMarkerId}/>
                 </div>
                 <div style={styleMarkerTable}>
                     <TableVariables onVariableSelect={this.setSelectedVariableId}

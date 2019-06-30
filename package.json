@@ -12,6 +12,7 @@
     "meteor-node-stubs": "^0.4.1",
     "npm": "^6.9.0",
     "react": "^16.8.6",
+    "react-component-hierarchy": "^1.1.0",
     "react-dom": "^16.8.6"
   },
   "meteor": {
