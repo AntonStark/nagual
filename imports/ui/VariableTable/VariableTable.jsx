@@ -29,14 +29,17 @@ export class VariableTable extends Component {
            </tr>
         ));
         return (
-            <table>
-                <thead>
-                <tr><th>Marker</th><th>Value</th></tr>
-                </thead>
-                <tbody>
-                {usesInfo}
-                </tbody>
-            </table>
+            <div>
+                <h3 style={{textAlign: 'center'}}>{variable.name}</h3>
+                <table>
+                    <thead>
+                    <tr><th>Marker</th><th>Value</th></tr>
+                    </thead>
+                    <tbody>
+                    {usesInfo}
+                    </tbody>
+                </table>
+            </div>
         )
     }
 }

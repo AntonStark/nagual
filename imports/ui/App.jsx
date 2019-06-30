@@ -30,7 +30,6 @@ class App extends Component {
 
         return (
             <div>
-                <h1 style={{margin: '5px'}}>Nagual Project</h1>
                 <div style={styleCanvas}>
                     <CanvasContainer markers={this.props.markers}
                                      handleSelectMarker={this.setSelectedMarkerId}
