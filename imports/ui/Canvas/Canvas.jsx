@@ -92,7 +92,8 @@ export class Canvas extends Component {
 
         return (
             <div onMouseMove={this.handleMouseMove} onWheel={this.handleWheel}>
-                <Layer markers={this.props.markers} selectedMarkerId={this.props.selectedMarkerId}
+                <Layer canvasField={this.state.canvasField} boundingRect={this.props.boundingRect}
+                       markers={this.props.markers} selectedMarkerId={this.props.selectedMarkerId}
                        onMarkerSelection={this.props.handleSelectMarker} onDeleteMarker={this.handlerDeleteMarker}/>
                 <div style={styleBackground}>
                     <BackgroundSVG canvasField={nextCanvasFiled}/>
