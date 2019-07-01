@@ -41,3 +41,7 @@
   color: inherit;
   background: none;
 }
+
+body {
+  margin: 0;
+}

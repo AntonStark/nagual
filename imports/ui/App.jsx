@@ -24,14 +24,17 @@ class App extends Component {
         this.setState({selectedVariableId: var_id});
     }
     render() {
-        const styleCanvas = {position: 'absolute', left: '100px'};
-        const styleMarkerTable = {position: 'absolute', left: '1500px', top: '150px', textAlign: 'left'};
-        const styleVariableTable = {position: 'absolute', left: '1500px', top: '500px', textAlign: 'left'};
+        const styleCanvas = {position: 'absolute',
+            borderBottom: 'solid 1px black', borderRight: 'solid 1px black',
+            marginTop: '4px', marginLeft: '4px'};
+        const styleMarkerTable = {position: 'absolute', left: '1200px', top: '150px', textAlign: 'left'};
+        const styleVariableTable = {position: 'absolute', left: '1200px', top: '500px', textAlign: 'left'};
 
         return (
             <div>
                 <div style={styleCanvas}>
-                    <CanvasContainer markers={this.props.markers}
+                    <CanvasContainer width={1200} height={900} basePoint={{x: 0, y: 0}}
+                                     markers={this.props.markers}
                                      handleSelectMarker={this.setSelectedMarkerId}
                                      selectedMarkerId={this.state.selectedMarkerId}/>
                 </div>

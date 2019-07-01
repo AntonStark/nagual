@@ -12,7 +12,8 @@ export class CanvasContainer extends Component {
     render() {
         return (
             <div ref={this.containerRef}>
-                <Canvas markers={this.props.markers}
+                <Canvas width={this.props.width} height={this.props.height} basePoint={this.props.basePoint}
+                        markers={this.props.markers}
                         handleSelectMarker={this.props.handleSelectMarker}
                         selectedMarkerId={this.props.selectedMarkerId}
                         boundingRect={this.boundingRect}/>

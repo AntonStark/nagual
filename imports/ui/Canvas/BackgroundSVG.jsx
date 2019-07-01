@@ -11,7 +11,8 @@ export class BackgroundSVG extends Component {
 
         return (
             <div style={style}>
-                <svg ref={this.svgRef} viewBox={this.props.canvasField} width={1380} height={900}>
+                <svg ref={this.svgRef} viewBox={this.props.canvasField}
+                     width={this.props.width} height={this.props.height}>
                     <image x={0} y={0} width={3963} height={3308} xlinkHref={'/mock/kremlin_test-01.jpg'}/>
                 </svg>
             </div>

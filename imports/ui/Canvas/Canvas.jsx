@@ -9,11 +9,10 @@ import { Markers } from "../../api/markers";
 export class Canvas extends Component {
     constructor(props) {
         super(props);
-        this.canvasFieldBase = {x: 1000, y: 1000, w: 1380, h: 900};
         this.state = {
             lock: true,
             wheelY: 0,
-            canvasField: this.canvasFieldBase
+            canvasField: {x: props.basePoint.x, y: props.basePoint.y, w: props.width, h: props.height}
         };
 
         this.handleLockToggle = this.handleLockToggle.bind(this);
@@ -66,9 +65,9 @@ export class Canvas extends Component {
             return `${box.x} ${box.y} ${box.w} ${box.h}`;
 
         const factor = 1 / Math.pow(1.006, actualWheelY);
-        const width = this.canvasFieldBase.w * factor;
+        const width = this.props.width * factor;
         // width = Math.min(wM, width);
-        const height = this.canvasFieldBase.h * factor;
+        const height = this.props.height * factor;
         // height = Math.min(hM, height);
 
         // (x_mouse - x_old) / width_old = (x_mouse - x_new) / width_new
@@ -96,7 +95,8 @@ export class Canvas extends Component {
                        markers={this.props.markers} selectedMarkerId={this.props.selectedMarkerId}
                        onMarkerSelection={this.props.handleSelectMarker} onDeleteMarker={this.handlerDeleteMarker}/>
                 <div style={styleBackground}>
-                    <BackgroundSVG canvasField={nextCanvasFiled}/>
+                    <BackgroundSVG canvasField={nextCanvasFiled}
+                                   width={this.props.width} height={this.props.height}/>
                 </div>
                 <div style={styleLock}>
                     <LockComponent lock={this.state.lock} onLockToggle={this.handleLockToggle}/>
