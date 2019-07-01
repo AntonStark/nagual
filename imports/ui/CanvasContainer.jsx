@@ -13,7 +13,7 @@ export class CanvasContainer extends Component {
         return (
             <div ref={this.containerRef}>
                 <Canvas width={this.props.width} height={this.props.height} basePoint={this.props.basePoint}
-                        markers={this.props.markers}
+                        markers={this.props.markers} canvasLock={this.props.canvasLock}
                         handleSelectMarker={this.props.handleSelectMarker}
                         selectedMarkerId={this.props.selectedMarkerId}
                         boundingRect={this.boundingRect}/>

@@ -2,31 +2,27 @@ import React, { Component } from 'react'
 
 import {BackgroundSVG} from "./BackgroundSVG";
 import { Layer } from '/imports/ui/Canvas/Layer'
-import { LockComponent } from "/imports/ui/LockComponent";
 
 import { Markers } from "../../api/markers";
 
 export class Canvas extends Component {
     constructor(props) {
         super(props);
+        const bP = props.basePoint;
         this.state = {
-            lock: true,
             wheelY: 0,
-            canvasField: {x: props.basePoint.x, y: props.basePoint.y, w: props.width, h: props.height}
+            canvasField: {x: bP.x, y: bP.y, w: props.width, h: props.height}
         };
 
-        this.handleLockToggle = this.handleLockToggle.bind(this);
         this.handleAddMarker = this.handleAddMarker.bind(this);
         this.handlerDeleteMarker = this.handlerDeleteMarker.bind(this);
 
         this.handleMouseMove = this.handleMouseMove.bind(this);
         this.handleWheel = this.handleWheel.bind(this);
     }
-    handleLockToggle(checked) {
-        this.setState({lock: checked});
-    }
+
     handleAddMarker(x, y) {
-        if (!this.state.lock) {
+        if (!this.props.canvasLock) {
             const addedId = Markers.insert({
                 geometry: {pos_x: x, pos_y: y},
                 data: {vars: []}
@@ -37,7 +33,7 @@ export class Canvas extends Component {
             console.log('canvas locked')
     }
     handlerDeleteMarker(marker) {
-        if (!this.state.lock)
+        if (!this.props.canvasLock)
             Markers.remove({_id: marker._id});
         else
             console.log('canvas locked')
@@ -84,7 +80,6 @@ export class Canvas extends Component {
 
     render() {
         const styleBackground = {display: 'inline-block'};
-        const styleLock = {display: 'inline-block', position: 'absolute', margin: '10px'};
 
         const cF = this.state.canvasField;
         const nextCanvasFiled = `${cF.x} ${cF.y} ${cF.w} ${cF.h}`;
@@ -97,9 +92,6 @@ export class Canvas extends Component {
                 <div style={styleBackground}>
                     <BackgroundSVG canvasField={nextCanvasFiled}
                                    width={this.props.width} height={this.props.height}/>
-                </div>
-                <div style={styleLock}>
-                    <LockComponent lock={this.state.lock} onLockToggle={this.handleLockToggle}/>
                 </div>
             </div>
         );
