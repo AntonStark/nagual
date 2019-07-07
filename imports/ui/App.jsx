@@ -3,8 +3,9 @@ import { withTracker } from 'meteor/react-meteor-data'
 
 import { ActionBar } from '/imports/ui/ActionBar/ActionBar';
 import { CanvasContainer } from '/imports/ui/CanvasContainer';
+import { TypesPanel } from './TypesPanel/TypesPanel';
 // import { TableVariables } from "/imports/ui/MarkerData/Table";
-// import { VariableTable } from '/imports/ui/VariableTable/VariableTable';
+// import { VariableTable } from '/imports/ui/MarkerData/VariableTable';
 
 import { Markers } from '../api/markers';
 
@@ -60,12 +61,14 @@ class App extends Component {
                 </div>
             </div>
         );*/
-        // noinspection HtmlUnknownAttribute
+        // noinspection HtmlUnknownAttribute,HtmlDeprecatedAttribute
         return (
-            <table style={{height: '100%', width: '100%'}} cols="3">
+            <table style={{height: '100%', width: '100%'}} cols="3" cellPadding="0px" cellSpacing="1px">
                 <tbody>
                 <tr>
-                    <td style={{background: 'lightblue', width: '120px'}}>types</td>
+                    <td style={{width: '120px'}}>
+                        <TypesPanel/>
+                    </td>
                     <td style={{width: '1200px'}}>
                         <CanvasContainer width={1200} height={900} basePoint={{x: 0, y: 0}}
                                          markers={this.props.markers} canvasLock={this.state.canvasLock}
