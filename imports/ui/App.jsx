@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { withTracker } from 'meteor/react-meteor-data'
 
-import { CanvasContainer } from '/imports/ui/CanvasContainer';
-import { TableVariables } from "/imports/ui/MarkerData/Table";
-import { VariableTable } from '/imports/ui/VariableTable/VariableTable';
 import { ActionBar } from '/imports/ui/ActionBar/ActionBar';
+import { CanvasContainer } from '/imports/ui/CanvasContainer';
+// import { TableVariables } from "/imports/ui/MarkerData/Table";
+// import { VariableTable } from '/imports/ui/VariableTable/VariableTable';
 
 import { Markers } from '../api/markers';
 
@@ -30,7 +30,7 @@ class App extends Component {
         this.setState({canvasLock: checked});
     }
     render() {
-        const styleCanvas = {position: 'absolute',
+        /*const styleCanvas = {position: 'absolute',
             borderBottom: 'solid 1px black', borderRight: 'solid 1px black',
             marginTop: '4px', marginLeft: '4px'};
         const styleMarkerTable = {position: 'absolute', left: '1400px', top: '150px', textAlign: 'left'};
@@ -59,7 +59,29 @@ class App extends Component {
                     <ActionBar canvasLock={this.state.canvasLock} handleLockToggle={this.handleLockToggle}/>
                 </div>
             </div>
-        );
+        );*/
+        // noinspection HtmlUnknownAttribute
+        return (
+            <table style={{height: '100%', width: '100%'}} cols="3">
+                <tbody>
+                <tr>
+                    <td style={{background: 'lightblue', width: '120px'}}>types</td>
+                    <td style={{width: '1200px'}}>
+                        <CanvasContainer width={1200} height={900} basePoint={{x: 0, y: 0}}
+                                         markers={this.props.markers} canvasLock={this.state.canvasLock}
+                                         handleSelectMarker={this.setSelectedMarkerId}
+                                         selectedMarkerId={this.state.selectedMarkerId}/>
+                    </td>
+                    <td style={{background: 'lightgrey'}}>data</td>
+                </tr>
+                <tr>
+                   <td colSpan={3} style={{height: '60px'}}>
+                       <ActionBar canvasLock={this.state.canvasLock} handleLockToggle={this.handleLockToggle}/>
+                   </td>
+                </tr>
+                </tbody>
+            </table>
+        )
     }
 }
 

@@ -46,6 +46,10 @@ body {
   margin: 0;
 }
 
+#react-target {
+  height: 100vh;
+}
+
 .actionButton {
   margin: 0 10px;
   display: inline-block;
