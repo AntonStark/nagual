@@ -4,7 +4,7 @@ import { withTracker } from 'meteor/react-meteor-data'
 import { TableRow } from '/imports/ui/MarkerData/TableRow';
 import { TableRowAdding } from '/imports/ui/MarkerData/TableRowAdding';
 
-import { Variables, getVatiableId } from '../../api/variables'
+import { Variables, getVariableId } from '../../api/variables'
 import { Markers, isMarkerHasThatVar } from "../../api/markers";
 
 export class Table extends Component {
@@ -21,7 +21,7 @@ export class Table extends Component {
             console.error('empty value not allowed');
             return;
         }
-        let varId = getVatiableId(name);
+        let varId = getVariableId(name);
         if (!varId)
             varId = Variables.insert({name: name, uses: []});
 

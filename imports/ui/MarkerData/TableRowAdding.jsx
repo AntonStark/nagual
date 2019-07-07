@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import { isMarkerHasThatVar } from "../../api/markers";
-import { getVatiableId } from "../../api/variables";
+import { getVariableId } from "../../api/variables";
 
 export class TableRowAdding extends Component {
     constructor(props) {
@@ -13,7 +13,7 @@ export class TableRowAdding extends Component {
     }
     handlerNameField(e) {
         if (e.key === 'Enter' || e.key === 'Tab') {
-            const varId = getVatiableId(this.refNameField.current.value);
+            const varId = getVariableId(this.refNameField.current.value);
             if (varId && isMarkerHasThatVar(this.props.selectedMarker, varId)) {
                 console.error('that var already in use on marker');
                 return;
