@@ -16,7 +16,12 @@ export function getTypes() {
     return MTypes.find({});
 }
 
-export function changeColor(typeId, newColor) {
-    const nAffected = MTypes.update(typeId, {$set: {color: newColor}});
+export function changeName(typeId, name) {
+    const nAffected = MTypes.update(typeId, {$set: {name: name}});
+    return nAffected > 0;
+}
+
+export function changeColor(typeId, color) {
+    const nAffected = MTypes.update(typeId, {$set: {color: color}});
     return nAffected > 0;
 }

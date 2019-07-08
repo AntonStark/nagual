@@ -16,10 +16,14 @@ class App extends Component {
             selectedMarkerId: undefined,
             selectedVariableId: undefined,
             canvasLock: true,
+            selectedTypes: {},
         };
         this.setSelectedMarkerId = this.setSelectedMarkerId.bind(this);
         this.setSelectedVariableId = this.setSelectedVariableId.bind(this);
         this.handleLockToggle = this.handleLockToggle.bind(this);
+        this.handleTypeSelection = this.handleTypeSelection.bind(this);
+
+        this.refTypesPanel = React.createRef();
     }
     setSelectedMarkerId(marker_id) {
         this.setState({selectedMarkerId: marker_id});
@@ -29,6 +33,13 @@ class App extends Component {
     }
     handleLockToggle(checked) {
         this.setState({canvasLock: checked});
+    }
+    handleTypeSelection(typeId, isSelected) {
+        let selectedTypes = this.state.selectedTypes;
+        selectedTypes[typeId] = isSelected;
+        this.setState({selectedTypes: selectedTypes},
+            () => this.refTypesPanel.current.forceUpdate()      // meteor withTracker seems to ignore changes in props
+        );
     }
     render() {
         /*const styleCanvas = {position: 'absolute',
@@ -67,7 +78,8 @@ class App extends Component {
                 <tbody>
                 <tr>
                     <td style={{width: '120px'}}>
-                        <TypesPanel/>
+                        <TypesPanel selectedTypes={this.state.selectedTypes} ref={this.refTypesPanel}
+                                    handleTypeSelection={this.handleTypeSelection}/>
                     </td>
                     <td style={{width: '1200px'}}>
                         <CanvasContainer width={1200} height={900} basePoint={{x: 0, y: 0}}
