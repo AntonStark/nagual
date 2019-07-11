@@ -54,3 +54,16 @@ body {
   margin: 0 10px;
   display: inline-block;
 }
+
+.colorInputStyle {
+  font-size: 9px;
+  border: 1px solid;
+  margin: 0 1px;
+  text-align: center;
+}
+
+.typesPanelItem {
+  border: 1px solid black;
+  padding: 4px 8px;
+  margin: 2px 0;
+}

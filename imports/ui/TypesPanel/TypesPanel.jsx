@@ -4,7 +4,7 @@ import { withTracker } from 'meteor/react-meteor-data'
 import { TypeItem } from './TypeItem';
 import { AddTypeButton } from './AddTypeButton';
 
-import { MTypes } from '../../api/marker_types';
+import { MTypes, updateType } from '../../api/marker_types';
 
 export class TypesPanelUI extends Component {
     constructor(props) {
@@ -19,14 +19,14 @@ export class TypesPanelUI extends Component {
     }
 
     render() {
-        const typesItems = this.props.types
-            .map(
-                (markerTypeObj, i) =>
-                <TypeItem name={markerTypeObj.name} key={i}
-                          checked={this.isSelected(markerTypeObj._id)} editable={false}
+        const typesItems = this.props.types.map(
+            (markerTypeObj, i) =>
+                <TypeItem name={markerTypeObj.name} color={markerTypeObj.color} key={i}
+                          checked={this.isSelected(markerTypeObj._id)}
                           handleTypeSelection={isSelected =>
-                              this.props.handleTypeSelection(markerTypeObj._id, isSelected)
-                          }/>
+                              this.props.handleTypeSelection(markerTypeObj._id, isSelected)}
+                          handleTypeUpdating={(newName, newColor) => updateType(markerTypeObj._id, newName, newColor)}
+                          handleTypeActivation={() => this.props.setActiveType(markerTypeObj._id)}/>
                 );
         return (
             <div style={{padding: '0 4px'}}>

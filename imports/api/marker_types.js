@@ -25,3 +25,8 @@ export function changeColor(typeId, color) {
     const nAffected = MTypes.update(typeId, {$set: {color: color}});
     return nAffected > 0;
 }
+
+export function updateType(typeId, name, color) {
+    const nAffected = MTypes.update(typeId, {$set: {name: name, color: color}});
+    return nAffected > 0;
+}
