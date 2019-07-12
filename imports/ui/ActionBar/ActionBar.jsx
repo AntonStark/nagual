@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { LockComponent } from './LockComponent';
+import { ToggleNumbering } from './ToggleNumbering';
 
 export class ActionBar extends Component {
     constructor(props) {
@@ -13,7 +14,12 @@ export class ActionBar extends Component {
                 <button className={"actionButton"}>Скачать CSV</button>
                 <button className={"actionButton"}>Нумерация</button>
                 <span className={"actionButton"}>
-                    <LockComponent lock={this.props.canvasLock} onLockToggle={this.props.handleLockToggle}/>
+                    <LockComponent lock={this.props.canvasLock}
+                                   toggleLock={this.props.toggleLock}/>
+                </span>
+                <span className={"actionButton"}>
+                    <ToggleNumbering showNumbering={this.props.showNumbering}
+                                     toggleNumbering={this.props.toggleNumbering}/>
                 </span>
             </div>
         );

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export class LockComponent extends Component {
+export class ToggleNumbering extends Component {
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
@@ -8,14 +8,14 @@ export class LockComponent extends Component {
     }
     handleChange(e) {
         const newVal = (e.target.checked !== undefined ? e.target.checked : !this.refCheckbox.current.checked);
-        this.props.toggleLock(newVal);
+        this.props.toggleNumbering(newVal);
     }
     render() {
         return (
             <form onClick={this.handleChange}>
-                <label>Блокировка<br/>расстановки</label>
-                <input ref={this.refCheckbox} type="checkbox" name="lock-checkbox"
-                       checked={this.props.lock} onChange={this.handleChange}/>
+                <label>Отображать<br/>нумерацию</label>
+                <input ref={this.refCheckbox} type="checkbox" name="numbering-checkbox"
+                       checked={this.props.showNumbering} onChange={this.handleChange}/>
             </form>
         )
     }

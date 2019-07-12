@@ -16,12 +16,14 @@ class App extends Component {
             selectedMarkerId: undefined,
             selectedVariableId: undefined,
             canvasLock: true,
+            showNumbering: false,
             selectedTypes: {},
             activeType: undefined,
         };
         this.setSelectedMarkerId = this.setSelectedMarkerId.bind(this);
         this.setSelectedVariableId = this.setSelectedVariableId.bind(this);
-        this.handleLockToggle = this.handleLockToggle.bind(this);
+        this.toggleLock = this.toggleLock.bind(this);
+        this.toggleNumbering = this.toggleNumbering.bind(this);
         this.handleTypeSelection = this.handleTypeSelection.bind(this);
         this.setActiveType = this.setActiveType.bind(this);
 
@@ -33,8 +35,11 @@ class App extends Component {
     setSelectedVariableId(var_id) {
         this.setState({selectedVariableId: var_id});
     }
-    handleLockToggle(checked) {
+    toggleLock(checked) {
         this.setState({canvasLock: checked});
+    }
+    toggleNumbering(toggle) {
+        this.setState({showNumbering: toggle});
     }
     handleTypeSelection(typeId, isSelected) {
         let selectedTypes = this.state.selectedTypes;
@@ -73,7 +78,7 @@ class App extends Component {
                                    onMarkerSelection={this.setSelectedMarkerId}/>
                 </div>
                 <div style={styleActionBar}>
-                    <ActionBar canvasLock={this.state.canvasLock} handleLockToggle={this.handleLockToggle}/>
+                    <ActionBar canvasLock={this.state.canvasLock} toggleLock={this.toggleLock}/>
                 </div>
             </div>
         );*/
@@ -97,7 +102,8 @@ class App extends Component {
                 </tr>
                 <tr>
                    <td colSpan={3} style={{height: '60px'}}>
-                       <ActionBar canvasLock={this.state.canvasLock} handleLockToggle={this.handleLockToggle}/>
+                       <ActionBar canvasLock={this.state.canvasLock} toggleLock={this.toggleLock}
+                                  showNumbering={this.state.showNumbering} toggleNumbering={this.toggleNumbering}/>
                    </td>
                 </tr>
                 </tbody>
