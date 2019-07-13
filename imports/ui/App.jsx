@@ -105,28 +105,28 @@ class App extends Component {
         );*/
         // noinspection HtmlUnknownAttribute,HtmlDeprecatedAttribute
         return (
-            <table style={{height: '100%', width: '100%'}} cols="3" cellPadding="0px" cellSpacing="1px">
+            <table id="mainLayoutTable" cols="3" cellPadding="0px" cellSpacing="1px">
                 <tbody>
                 <tr>
-                    <td style={{width: '130px'}}>
+                    <td id="Container">
                         <TypesPanel ref={this.refTypesPanel}
                                     selectedTypes={this.state.selectedTypes} handleTypeSelection={this.handleTypeSelection}
                                     activeTypeId={this.state.activeTypeId} setActiveType={this.setActiveType}
                                     registerType={this.registerType}/>
                     </td>
-                    <td style={{width: '1200px'}}>
+                    <td id="canvasContainer">
                         <CanvasContainer width={1200} height={900} basePoint={{x: 0, y: 0}}
                                          markers={this.props.markers} canvasLock={this.state.canvasLock}
                                          handleSelectMarker={this.setSelectedMarkerId}
                                          selectedMarkerId={this.state.selectedMarkerId}/>
                     </td>
-                    <td style={{background: 'lightgrey'}}>data</td>
+                    <td id="dataTableContainer">data</td>
                 </tr>
                 <tr>
-                   <td colSpan={3} style={{height: '60px'}}>
-                       <ActionBar canvasLock={this.state.canvasLock} toggleLock={this.toggleLock}
-                                  showNumbering={this.state.showNumbering} toggleNumbering={this.toggleNumbering}/>
-                   </td>
+                    <td id="actionBar" colSpan={3}>
+                        <ActionBar canvasLock={this.state.canvasLock} toggleLock={this.toggleLock}
+                                   showNumbering={this.state.showNumbering} toggleNumbering={this.toggleNumbering}/>
+                    </td>
                 </tr>
                 </tbody>
             </table>

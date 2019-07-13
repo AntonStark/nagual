@@ -67,3 +67,29 @@ body {
   padding: 4px 8px;
   margin: 2px 0;
 }
+
+.selectedTypesPanelItem {
+  background: darkgray;
+}
+
+
+#mainLayoutTable {
+  height: 100%;
+  width: 100%;
+}
+
+#mainLayoutTable td, #mainLayoutTable td * {
+  vertical-align: top;
+}
+
+#Container {
+  width: 130px;
+}
+
+#canvasContainer {
+  width: 1200px;
+}
+
+#actionBar {
+  height: 60px;
+}
