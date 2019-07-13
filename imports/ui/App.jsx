@@ -18,7 +18,7 @@ class App extends Component {
             canvasLock: true,
             showNumbering: false,
             selectedTypes: {},
-            activeType: undefined,
+            activeTypeId: undefined,
         };
         this.setSelectedMarkerId = this.setSelectedMarkerId.bind(this);
         this.setSelectedVariableId = this.setSelectedVariableId.bind(this);
@@ -26,6 +26,8 @@ class App extends Component {
         this.toggleNumbering = this.toggleNumbering.bind(this);
         this.handleTypeSelection = this.handleTypeSelection.bind(this);
         this.setActiveType = this.setActiveType.bind(this);
+        this.dropActiveType = this.dropActiveType.bind(this);
+        this.registerType = this.registerType.bind(this);
 
         this.refTypesPanel = React.createRef();
     }
@@ -41,7 +43,16 @@ class App extends Component {
     toggleNumbering(toggle) {
         this.setState({showNumbering: toggle});
     }
+    registerType(typeId, isSelected=true) {
+        let selectedTypes = this.state.selectedTypes;
+        selectedTypes[typeId] = isSelected;
+        this.setState({selectedTypes: selectedTypes});
+        return isSelected;
+    }
     handleTypeSelection(typeId, isSelected) {
+        if (typeId === this.state.activeTypeId)
+            this.dropActiveType();
+
         let selectedTypes = this.state.selectedTypes;
         selectedTypes[typeId] = isSelected;
         this.setState({selectedTypes: selectedTypes},
@@ -49,7 +60,17 @@ class App extends Component {
         );
     }
     setActiveType(typeId) {
-        this.setState({activeType: typeId});
+        if (!this.state.selectedTypes[typeId])
+            return;
+
+        this.setState(prevState => (
+            prevState.selectedTypes[typeId]
+                ? {activeTypeId: typeId}
+                : null
+        ));
+    }
+    dropActiveType() {
+        this.setState({activeTypeId: undefined});
     }
     render() {
         /*const styleCanvas = {position: 'absolute',
@@ -88,9 +109,10 @@ class App extends Component {
                 <tbody>
                 <tr>
                     <td style={{width: '130px'}}>
-                        <TypesPanel selectedTypes={this.state.selectedTypes} ref={this.refTypesPanel}
-                                    handleTypeSelection={this.handleTypeSelection}
-                                    setActiveType={this.setActiveType}/>
+                        <TypesPanel ref={this.refTypesPanel}
+                                    selectedTypes={this.state.selectedTypes} handleTypeSelection={this.handleTypeSelection}
+                                    activeTypeId={this.state.activeTypeId} setActiveType={this.setActiveType}
+                                    registerType={this.registerType}/>
                     </td>
                     <td style={{width: '1200px'}}>
                         <CanvasContainer width={1200} height={900} basePoint={{x: 0, y: 0}}

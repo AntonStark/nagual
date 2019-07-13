@@ -14,15 +14,16 @@ export class TypesPanelUI extends Component {
     isSelected(typeId) {
         return (typeId in this.props.selectedTypes
                 ? this.props.selectedTypes[typeId]
-                : true
-        )
+                : true);
     }
+    isActive(typeId) {return (typeId === this.props.activeTypeId);}
 
     render() {
         const typesItems = this.props.types.map(
             (markerTypeObj, i) =>
                 <TypeItem name={markerTypeObj.name} color={markerTypeObj.color} key={i}
-                          checked={this.isSelected(markerTypeObj._id)}
+                          checked={this.isSelected(markerTypeObj._id)} active={this.isActive(markerTypeObj._id)}
+                          registerSelf={() => this.props.registerType(markerTypeObj._id)}
                           handleTypeSelection={isSelected =>
                               this.props.handleTypeSelection(markerTypeObj._id, isSelected)}
                           handleTypeUpdating={(newName, newColor) => updateType(markerTypeObj._id, newName, newColor)}

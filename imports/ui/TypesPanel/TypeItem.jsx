@@ -51,7 +51,8 @@ export class TypeItem extends Component {
         } else {
             const actualColor = `rgb(${this.props.color[0]}, ${this.props.color[1]}, ${this.props.color[2]})`;
             return (
-                <li className="typesPanelItem" style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}
+                <li className={(this.props.active ? 'typesPanelItem selectedTypesPanelItem' : 'typesPanelItem')}
+                    style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}
                     onClick={this.clickHandler}>
                     {this.props.name}
                     <div style={{display: 'flex', justifyContent: 'flex-end', alignItems: 'center'}}>
@@ -60,5 +61,9 @@ export class TypeItem extends Component {
                 </li>
             );
         }
+    }
+
+    componentDidMount() {
+        this.props.registerSelf();
     }
 }
