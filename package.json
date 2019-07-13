@@ -10,10 +10,11 @@
   "dependencies": {
     "@babel/runtime": "^7.3.4",
     "meteor-node-stubs": "^0.4.1",
-    "npm": "^6.9.0",
+    "npm": "^6.10.1",
     "react": "^16.8.6",
     "react-component-hierarchy": "^1.1.0",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "react-tabulator": "^0.9.1"
   },
   "meteor": {
     "mainModule": {

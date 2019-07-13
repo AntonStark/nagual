@@ -4,6 +4,7 @@ import { withTracker } from 'meteor/react-meteor-data'
 import { ActionBar } from '/imports/ui/ActionBar/ActionBar';
 import { CanvasContainer } from '/imports/ui/CanvasContainer';
 import { TypesPanel } from './TypesPanel/TypesPanel';
+import  { DataTable } from './DataTable/DataTable';
 // import { TableVariables } from "/imports/ui/MarkerData/Table";
 // import { VariableTable } from '/imports/ui/MarkerData/VariableTable';
 
@@ -73,36 +74,6 @@ class App extends Component {
         this.setState({activeTypeId: undefined});
     }
     render() {
-        /*const styleCanvas = {position: 'absolute',
-            borderBottom: 'solid 1px black', borderRight: 'solid 1px black',
-            marginTop: '4px', marginLeft: '4px'};
-        const styleMarkerTable = {position: 'absolute', left: '1400px', top: '150px', textAlign: 'left'};
-        const styleVariableTable = {position: 'absolute', left: '1400px', top: '500px', textAlign: 'left'};
-        const styleActionBar = {position: 'absolute', borderRight: 'solid 1px black',
-            width: '1189px', height: '80px',
-            top: '910px', left: '15px', marginTop: '4px'};
-
-        return (
-            <div>
-                <div style={styleCanvas}>
-                    <CanvasContainer width={1200} height={900} basePoint={{x: 0, y: 0}}
-                                     markers={this.props.markers} canvasLock={this.state.canvasLock}
-                                     handleSelectMarker={this.setSelectedMarkerId}
-                                     selectedMarkerId={this.state.selectedMarkerId}/>
-                </div>
-                <div style={styleMarkerTable}>
-                    <TableVariables onVariableSelect={this.setSelectedVariableId}
-                                    selectedMarker={Markers.findOne({_id: this.state.selectedMarkerId})}/>
-                </div>
-                <div style={styleVariableTable}>
-                    <VariableTable variableId={this.state.selectedVariableId}
-                                   onMarkerSelection={this.setSelectedMarkerId}/>
-                </div>
-                <div style={styleActionBar}>
-                    <ActionBar canvasLock={this.state.canvasLock} toggleLock={this.toggleLock}/>
-                </div>
-            </div>
-        );*/
         // noinspection HtmlUnknownAttribute,HtmlDeprecatedAttribute
         return (
             <table id="mainLayoutTable" cols="3" cellPadding="0px" cellSpacing="1px">
@@ -120,7 +91,9 @@ class App extends Component {
                                          handleSelectMarker={this.setSelectedMarkerId}
                                          selectedMarkerId={this.state.selectedMarkerId}/>
                     </td>
-                    <td id="dataTableContainer">data</td>
+                    <td id="dataTableContainer">
+                        <DataTable/>
+                    </td>
                 </tr>
                 <tr>
                     <td id="actionBar" colSpan={3}>
