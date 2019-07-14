@@ -82,14 +82,35 @@ body {
   vertical-align: top;
 }
 
-#typesPanelContainer {
+#layoutMainRow {
+  height: 100%;
+}
+#layoutBottomRow {
+  height: 60px;
+}
+#layoutMainRow td {
+  height: inherit;
+}
+
+#typesPanelColumn {
   width: 130px;
 }
-
-#canvasContainer {
-  width: 1200px;
+#typesPanelContainer {
+  height: inherit;
+  overflow-y: auto;
 }
 
-#actionBar {
-  height: 60px;
+#canvasColumn {
+  width: 1200px;
+}
+#canvasContainer {
+  width: inherit;
+  height: inherit;
+}
+
+#dataTableContainer {
+  height: inherit;
+  overflow-y: auto;
+  overflow-x: auto;
+  width: 450px;
 }

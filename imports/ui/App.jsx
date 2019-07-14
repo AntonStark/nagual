@@ -78,24 +78,31 @@ class App extends Component {
         return (
             <table id="mainLayoutTable" cols="3" cellPadding="0px" cellSpacing="1px">
                 <tbody>
-                <tr>
-                    <td id="typesPanelContainer">
-                        <TypesPanel ref={this.refTypesPanel}
-                                    selectedTypes={this.state.selectedTypes} handleTypeSelection={this.handleTypeSelection}
-                                    activeTypeId={this.state.activeTypeId} setActiveType={this.setActiveType}
-                                    registerType={this.registerType}/>
+                <tr id="layoutMainRow">
+                    <td id="typesPanelColumn">
+                        <div id="typesPanelContainer">
+                            <TypesPanel
+                                ref={this.refTypesPanel}
+                                selectedTypes={this.state.selectedTypes} handleTypeSelection={this.handleTypeSelection}
+                                activeTypeId={this.state.activeTypeId} setActiveType={this.setActiveType}
+                                registerType={this.registerType}/>
+                        </div>
                     </td>
-                    <td id="canvasContainer">
-                        <CanvasContainer
-                            markers={this.props.markers}
-                            canvasLock={this.state.canvasLock} showNumbering={this.state.showNumbering}
-                            handleSelectMarker={this.setSelectedMarkerId} selectedMarkerId={this.state.selectedMarkerId}/>
+                    <td id="canvasColumn">
+                        <div id="canvasContainer">
+                            <CanvasContainer
+                                markers={this.props.markers}
+                                canvasLock={this.state.canvasLock} showNumbering={this.state.showNumbering}
+                                handleSelectMarker={this.setSelectedMarkerId} selectedMarkerId={this.state.selectedMarkerId}/>
+                        </div>
                     </td>
-                    <td id="dataTableContainer">
-                        <DataTable/>
+                    <td id="dataTableColumn">
+                        <div id="dataTableContainer">
+                            <DataTable/>
+                        </div>
                     </td>
                 </tr>
-                <tr>
+                <tr id="layoutBottomRow">
                     <td id="actionBar" colSpan={3}>
                         <ActionBar canvasLock={this.state.canvasLock} toggleLock={this.toggleLock}
                                    showNumbering={this.state.showNumbering} toggleNumbering={this.toggleNumbering}/>
