@@ -13,6 +13,7 @@
     "npm": "^6.10.1",
     "react": "^16.8.6",
     "react-component-hierarchy": "^1.1.0",
+    "react-debounce-render": "^5.0.0",
     "react-dom": "^16.8.6",
     "react-tabulator": "^0.9.1"
   },

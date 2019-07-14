@@ -4,7 +4,7 @@ import { withTracker } from 'meteor/react-meteor-data'
 import { TypeItem } from './TypeItem';
 import { AddTypeButton } from './AddTypeButton';
 
-import { MTypes, updateType } from '../../api/marker_types';
+import { deleteType, MTypes, updateType } from '../../api/marker_types';
 
 export class TypesPanelUI extends Component {
     constructor(props) {
@@ -16,7 +16,12 @@ export class TypesPanelUI extends Component {
                 ? this.props.selectedTypes[typeId]
                 : true);
     }
-    isActive(typeId) {return (typeId === this.props.activeTypeId);}
+    isActive(typeId) {
+        return (typeId === this.props.activeTypeId);
+    }
+    static deleteType(typeId) {
+        return deleteType(typeId);
+    }
 
     render() {
         const typesItems = this.props.types.map(

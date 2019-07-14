@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import {BackgroundSVG} from "./BackgroundSVG";
+import { BackgroundSVG } from "./BackgroundSVG";
 import { Layer } from '/imports/ui/Canvas/Layer'
 
 import { Markers } from "../../api/markers";
@@ -8,10 +8,13 @@ import { Markers } from "../../api/markers";
 export class Canvas extends Component {
     constructor(props) {
         super(props);
-        const bP = props.basePoint;
         this.state = {
             wheelY: 0,
-            canvasField: {x: bP.x, y: bP.y, w: props.width, h: props.height}
+            canvasField: {
+                x: 0,
+                y: 0,
+                w: (props.boundingRect ? props.boundingRect.width : 0),
+                h: (props.boundingRect ? props.boundingRect.height : 0)}
         };
 
         this.handleAddMarker = this.handleAddMarker.bind(this);
@@ -19,6 +22,8 @@ export class Canvas extends Component {
 
         this.handleMouseMove = this.handleMouseMove.bind(this);
         this.handleWheel = this.handleWheel.bind(this);
+        this.handleMouseDown = this.handleMouseDown.bind(this);
+        this.handleMouseUp = this.handleMouseUp.bind(this);
     }
 
     handleAddMarker(x, y) {
@@ -41,14 +46,39 @@ export class Canvas extends Component {
 
     handleMouseMove(e) {
         this.mousePos = {left: e.pageX, top: e.pageY};
+
+        if (this.anchorPoint) {
+            const rect = this.props.boundingRect;
+            this.setState(prevState => ({
+                canvasField: {...prevState.canvasField,
+                    x: this.anchorCanvasFiled.x
+                        + (this.anchorPoint.left - this.mousePos.left) / rect.width * this.anchorCanvasFiled.w,
+                    y: this.anchorCanvasFiled.y
+                        + (this.anchorPoint.top - this.mousePos.top) / rect.height * this.anchorCanvasFiled.h
+                }
+            }));
+        }
     }
     handleWheel(e) {
+        if (this.anchorPoint) {
+            e.preventDefault();
+            return;
+        }
+
         const dY = e.deltaY;
         this.setState((prevState) => ({
             wheelY: prevState.wheelY - dY,
             canvasField: this.calcCanvasFiled(prevState.wheelY - dY)
         }));
         e.preventDefault();
+    }
+    handleMouseDown(e) {
+        this.anchorPoint = {left: e.pageX, top: e.pageY};
+        this.anchorCanvasFiled = this.state.canvasField;
+    }
+    handleMouseUp() {
+        this.anchorPoint = undefined;
+        this.anchorCanvasFiled = undefined;
     }
 
     calcCanvasFiled(actualWheelY) {
@@ -57,13 +87,13 @@ export class Canvas extends Component {
         const box = this.state.canvasField;
         const rect = this.props.boundingRect;
         const mouse = this.mousePos;
-        if (!rect || !mouse)
+        if (!mouse)
             return `${box.x} ${box.y} ${box.w} ${box.h}`;
 
         const factor = 1 / Math.pow(1.006, actualWheelY);
-        const width = this.props.width * factor;
+        const width = rect.width * factor;
         // width = Math.min(wM, width);
-        const height = this.props.height * factor;
+        const height = rect.height * factor;
         // height = Math.min(hM, height);
 
         // (x_mouse - x_old) / width_old = (x_mouse - x_new) / width_new
@@ -79,19 +109,21 @@ export class Canvas extends Component {
     }
 
     render() {
-        const styleBackground = {display: 'inline-block'};
+        if (!this.props.boundingRect)
+            return null;
 
         const cF = this.state.canvasField;
         const nextCanvasFiled = `${cF.x} ${cF.y} ${cF.w} ${cF.h}`;
 
         return (
-            <div onMouseMove={this.handleMouseMove} onWheel={this.handleWheel}>
+            <div onMouseMove={this.handleMouseMove} onWheel={this.handleWheel}
+                 onMouseDown={this.handleMouseDown} onMouseUp={this.handleMouseUp}>
                 <Layer canvasField={this.state.canvasField} boundingRect={this.props.boundingRect}
                        markers={this.props.markers} selectedMarkerId={this.props.selectedMarkerId}
                        onMarkerSelection={this.props.handleSelectMarker} onDeleteMarker={this.handlerDeleteMarker}/>
-                <div style={styleBackground}>
+                <div style={{display: 'inline-block'}}>
                     <BackgroundSVG canvasField={nextCanvasFiled}
-                                   width={this.props.width} height={this.props.height}/>
+                                   width={this.props.boundingRect.width} height={this.props.boundingRect.height}/>
                 </div>
             </div>
         );

@@ -79,17 +79,17 @@ class App extends Component {
             <table id="mainLayoutTable" cols="3" cellPadding="0px" cellSpacing="1px">
                 <tbody>
                 <tr>
-                    <td id="Container">
+                    <td id="typesPanelContainer">
                         <TypesPanel ref={this.refTypesPanel}
                                     selectedTypes={this.state.selectedTypes} handleTypeSelection={this.handleTypeSelection}
                                     activeTypeId={this.state.activeTypeId} setActiveType={this.setActiveType}
                                     registerType={this.registerType}/>
                     </td>
                     <td id="canvasContainer">
-                        <CanvasContainer width={1200} height={900} basePoint={{x: 0, y: 0}}
-                                         markers={this.props.markers} canvasLock={this.state.canvasLock}
-                                         handleSelectMarker={this.setSelectedMarkerId}
-                                         selectedMarkerId={this.state.selectedMarkerId}/>
+                        <CanvasContainer
+                            markers={this.props.markers}
+                            canvasLock={this.state.canvasLock} showNumbering={this.state.showNumbering}
+                            handleSelectMarker={this.setSelectedMarkerId} selectedMarkerId={this.state.selectedMarkerId}/>
                     </td>
                     <td id="dataTableContainer">
                         <DataTable/>

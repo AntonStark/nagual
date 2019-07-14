@@ -30,3 +30,7 @@ export function updateType(typeId, name, color) {
     const nAffected = MTypes.update(typeId, {$set: {name: name, color: color}});
     return nAffected > 0;
 }
+
+export function deleteType(typeId) {
+    return MTypes.remove(typeId);
+}
